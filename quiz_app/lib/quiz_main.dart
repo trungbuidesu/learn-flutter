@@ -15,16 +15,16 @@ class QuizMain extends StatefulWidget {
 }
 
 class _QuizMainState extends State<QuizMain> {
-  Screen currentScreen = Screen.startScreen;
+  Screen _currentScreen = Screen.startScreen;
 
-  final List<String> answers = [];
+  final List<String> _answers = [];
 
   // Click on any answers
   void onClickAnswerQuestion(String answer) {
-    answers.add(answer);
-    if (answers.length == questionList.length) {
+    _answers.add(answer);
+    if (_answers.length == questionList.length) {
       setState(() {
-        currentScreen = Screen.summaryScreen;
+        _currentScreen = Screen.summaryScreen;
       });
     }
   }
@@ -32,21 +32,21 @@ class _QuizMainState extends State<QuizMain> {
   // Click on start quiz button
   void onClickStartQuiz() {
     setState(() {
-      currentScreen = Screen.questionAnswerScreen;
+      _currentScreen = Screen.questionAnswerScreen;
     });
   }
 
   // Click on reset quiz button
   void onClickRetryQuiz() {
     setState(() {
-      answers.clear();
-      currentScreen = Screen.startScreen;
+      _answers.clear();
+      _currentScreen = Screen.startScreen;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    switch (currentScreen) {
+    switch (_currentScreen) {
       case Screen.startScreen:
         return QuizStart(onClickStartQuiz: onClickStartQuiz);
       case Screen.questionAnswerScreen:
@@ -56,6 +56,7 @@ class _QuizMainState extends State<QuizMain> {
       case Screen.summaryScreen:
         return QuizSummary(
           onClickRetryQuiz: onClickRetryQuiz,
+          answers: _answers,
         );
     }
   }

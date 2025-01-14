@@ -3,11 +3,8 @@ import 'package:quiz_app/components/gradient_container.dart';
 import 'package:quiz_app/quiz_main.dart';
 
 final List<Color> gradientColors = [
-  Color(0xFF4A00E0), // Deep Purple
-  Color(0xFF8E2DE2), // Lighter Purple
-  Color(0xFFDA22FF), // Vivid Magenta
-  Color(0xFFFA8BFF), // Light Pink
-  Color(0xFFFFDEE9), // Soft Pink
+  Colors.deepPurple, // Tím đậm
+  Colors.purple, // Tím sáng hơn
 ];
 
 void main() {
