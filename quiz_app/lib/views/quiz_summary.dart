@@ -49,9 +49,13 @@ class QuizSummary extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(
+          height: 20,
+        ),
         IconButton(
           onPressed: onClickRetryQuiz,
           icon: Icon(Icons.refresh),
+          iconSize: 30,
           style: IconButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: const Color.fromARGB(255, 83, 0, 104)),

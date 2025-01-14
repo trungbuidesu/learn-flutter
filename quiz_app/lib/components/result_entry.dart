@@ -22,7 +22,7 @@ class ResultEntry extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 100.0),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50.0),
       child: Column(
         children: [
           Row(
@@ -46,25 +46,28 @@ class ResultEntry extends StatelessWidget {
                 width: 20,
               ),
               Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    question,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  Text(
-                    answer,
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                  Text(correctAnswer,
-                      style: TextStyle(
-                          color:
-                              isCorrectAnswer ? Colors.white : Colors.redAccent,
-                          fontSize: 15))
-                ],
-              ))
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      question,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    Text(
+                      answer,
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                    Text(correctAnswer,
+                        style: TextStyle(
+                            color: isCorrectAnswer
+                                ? Colors.white
+                                : Colors.redAccent,
+                            fontSize: 15))
+                  ],
+                ),
+              )
             ],
           ),
           const SizedBox(
