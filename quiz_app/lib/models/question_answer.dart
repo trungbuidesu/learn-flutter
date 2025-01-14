@@ -8,4 +8,10 @@ class QuestionAnswer {
     required this.answers,
     required this.correctAnswer,
   });
+
+  List<String> getShuffledAnswers() {
+    final clonedAnswers = List.of(answers);
+    clonedAnswers.shuffle();
+    return clonedAnswers;
+  }
 }
