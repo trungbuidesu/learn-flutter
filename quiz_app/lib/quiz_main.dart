@@ -3,6 +3,7 @@ import 'package:quiz_app/data/question_bank.dart';
 import 'package:quiz_app/enums/screen.dart';
 import 'package:quiz_app/views/quiz_question.dart';
 import 'package:quiz_app/views/quiz_start.dart';
+import 'package:quiz_app/views/quiz_summary.dart';
 
 class QuizMain extends StatefulWidget {
   const QuizMain({super.key});
@@ -31,24 +32,31 @@ class _QuizMainState extends State<QuizMain> {
   // Click on start quiz button
   void onClickStartQuiz() {
     setState(() {
-      if (currentScreen == Screen.startScreen) {
-        currentScreen = Screen.questionAnswerScreen;
-      }
+      currentScreen = Screen.questionAnswerScreen;
+    });
+  }
+
+  // Click on reset quiz button
+  void onClickRetryQuiz() {
+    setState(() {
+      answers.clear();
+      currentScreen = Screen.startScreen;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (currentScreen == Screen.startScreen) {
-      return QuizStart(onClickStartQuiz: onClickStartQuiz);
-    } else if (currentScreen == Screen.questionAnswerScreen) {
-      return QuizQuestion(
-        onClickAnswerQuestion: onClickAnswerQuestion,
-      );
-    } else if (currentScreen == Screen.summaryScreen) {
-      return Text("this is summary");
-    } else {
-      return Text("No screen found");
+    switch (currentScreen) {
+      case Screen.startScreen:
+        return QuizStart(onClickStartQuiz: onClickStartQuiz);
+      case Screen.questionAnswerScreen:
+        return QuizQuestion(
+          onClickAnswerQuestion: onClickAnswerQuestion,
+        );
+      case Screen.summaryScreen:
+        return QuizSummary(
+          onClickRetryQuiz: onClickRetryQuiz,
+        );
     }
   }
 }

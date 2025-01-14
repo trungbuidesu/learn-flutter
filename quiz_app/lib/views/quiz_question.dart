@@ -18,6 +18,7 @@ class _QuizQuestionState extends State<QuizQuestion> {
   int currentQuestionIndex = 0;
 
   void answerQuestion(String answer) {
+    widget.onClickAnswerQuestion(answer);
     setState(() {
       currentQuestionIndex += 1;
     });
