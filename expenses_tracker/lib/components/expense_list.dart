@@ -9,8 +9,14 @@ class ExpenseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (BuildContext context, index) =>
+      itemBuilder: (BuildContext context, index) => Row(
+        children: [
           ExpenseEntry(expense: expenseList[index]),
+          const SizedBox(
+            height: 20,
+          )
+        ],
+      ),
       prototypeItem: ExpenseEntry(
           expense: Expense(
               title: "Unititled", amount: 0.00, createdDate: DateTime.now())),

@@ -21,16 +21,19 @@ class ExpenseEntry extends StatelessWidget {
     }
 
     return SizedBox(
-      width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(expense.title),
-          Text('${expense.amount}'),
-          displayIcon,
-          Text('${expense.createdDate.}')
-        ],
+      // width: double.infinity,
+      child: Card(
+        margin: EdgeInsets.all(10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(expense.title),
+            Text('${expense.amount}'),
+            displayIcon,
+            Text('${expense.createdDate}')
+          ],
+        ),
       ),
     );
   }
