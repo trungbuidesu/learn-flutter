@@ -25,6 +25,7 @@ class ExpenseChartItem extends StatelessWidget {
           height: 10,
         ),
         Icon(iconData),
+        Text("$count"),
       ],
     );
   }

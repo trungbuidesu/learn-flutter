@@ -13,7 +13,6 @@ class ExpenseList extends StatelessWidget {
         itemBuilder: (BuildContext context, index) =>
             ExpenseEntry(expense: expenseList[index]),
         itemCount: expenseList.length,
-        
       ),
     );
   }
