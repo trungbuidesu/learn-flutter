@@ -1,6 +1,5 @@
 import 'package:expenses_tracker/components/expense_entry.dart';
 import 'package:expenses_tracker/data/expense_data.dart';
-import 'package:expenses_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatelessWidget {
@@ -8,19 +7,14 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, index) => Row(
-        children: [
-          ExpenseEntry(expense: expenseList[index]),
-          const SizedBox(
-            height: 20,
-          )
-        ],
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, index) =>
+            ExpenseEntry(expense: expenseList[index]),
+        itemCount: expenseList.length,
+        
       ),
-      prototypeItem: ExpenseEntry(
-          expense: Expense(
-              title: "Unititled", amount: 0.00, createdDate: DateTime.now())),
-      itemCount: expenseList.length,
     );
   }
 }
