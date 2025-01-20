@@ -26,11 +26,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Container(
           alignment: Alignment.topCenter,
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: ExpenseList(),
-          )),
+          child: ExpenseList(),),
     );
   }
 }
