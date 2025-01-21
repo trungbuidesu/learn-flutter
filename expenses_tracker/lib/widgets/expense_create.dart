@@ -43,6 +43,46 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
     Navigator.pop(context);
   }
 
+  void _submitExpense() {
+    bool isDataValid = true;
+    String errorMessage = "";
+
+    if (_titleController.text.trim().isEmpty) {
+      isDataValid = false;
+      errorMessage += "\n- Missing title data!";
+    }
+
+    double? amountValue = double.tryParse(_amountController.text.trim());
+    if (amountValue == null || amountValue <= 0) {
+      isDataValid = false;
+      errorMessage += "\n- Missing amount data!";
+    }
+
+    if (_selectedDate == null) {
+      isDataValid = false;
+      errorMessage += "\n- Missing date data!";
+    }
+
+    if (!isDataValid) {
+      showDialog(
+          context: context,
+          builder: (builderContext) => AlertDialog(
+                title: Text("Error"),
+                content:
+                    Text("Please refer to the below error(s).$errorMessage"),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(builderContext),
+                      child: Text("Close")),
+                  TextButton(
+                      onPressed: () => Navigator.pop(builderContext),
+                      child: Text("Ok"))
+                ],
+              ));
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -119,9 +159,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
+                  onPressed: _submitExpense,
                   child: Text(
                     "Save expense",
                     style: TextStyle(fontWeight: FontWeight.bold),
