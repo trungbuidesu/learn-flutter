@@ -1,10 +1,11 @@
-import 'package:expenses_tracker/components/expense_list.dart';
+import 'package:expenses_tracker/widgets/components/expense_list.dart';
 import 'package:expenses_tracker/data/expense_data.dart';
 import 'package:expenses_tracker/models/expense.dart';
+import 'package:expenses_tracker/widgets/expense_create.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
-  const Expenses({Key? key}) : super(key: key);
+  const Expenses({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -15,12 +16,20 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> expenses = expenseList;
 
+  void _openCreateExpenseModal() {
+    showModalBottomSheet(
+        context: context, builder: (builderCtx) => ExpenseCreate());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome to my page"),
         backgroundColor: Colors.deepPurpleAccent,
+        actions: [
+          IconButton(onPressed: _openCreateExpenseModal, icon: Icon(Icons.add))
+        ],
       ),
       body: Container(
         alignment: Alignment.topCenter,
@@ -29,11 +38,8 @@ class _ExpensesState extends State<Expenses> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: 150,
-                  maxHeight: 150,
-                ),
+              SizedBox(
+                height: 200,
                 child: Card(
                     margin: EdgeInsets.all(0),
                     shadowColor: Colors.transparent,
