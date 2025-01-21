@@ -4,6 +4,8 @@ import 'package:expenses_tracker/models/expense.dart';
 import 'package:expenses_tracker/widgets/expense_create.dart';
 import 'package:flutter/material.dart';
 
+List<Expense> expenses = List.of(expenseList);
+
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
 
@@ -14,11 +16,25 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> expenses = expenseList;
+  void _addNewExpense(Expense expense) {
+    setState(() {
+      expenses.add(expense);
+    });
+  }
 
-  void _openAddExpenseOverlay() {
+  void _removeExpense(Expense expense) {
+    setState(() {
+      expenses.remove(expense);
+    });
+  }
+
+  void _openAddExpense() {
     showModalBottomSheet(
-        context: context, builder: (builderContext) => ExpenseCreate());
+        isScrollControlled: true,
+        context: context,
+        builder: (builderContext) => ExpenseCreate(
+              addNewExpense: _addNewExpense,
+            ));
   }
 
   @override
@@ -31,7 +47,7 @@ class _ExpensesState extends State<Expenses> {
         ),
         actions: [
           IconButton(
-            onPressed: _openAddExpenseOverlay,
+            onPressed: _openAddExpense,
             icon: Icon(Icons.add),
             style: IconButton.styleFrom(foregroundColor: Colors.black),
           )
@@ -45,7 +61,11 @@ class _ExpensesState extends State<Expenses> {
             const SizedBox(
               height: 10,
             ),
-            Expanded(child: ExpenseList()),
+            Expanded(
+                child: ExpenseList(
+              expenses: expenses,
+              onRemoveExpense: _removeExpense,
+            )),
           ],
         ),
       ),

@@ -10,7 +10,8 @@ class ExpenseEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IconData displayIconData = getDisplayCategoryIconData(expense.category!);
+    final IconData displayIconData = getDisplayCategoryIconData(
+        expense.category ?? ExpenseCategory.miscellaneous);
 
     return Card(
       color: Colors.purple.shade50,
