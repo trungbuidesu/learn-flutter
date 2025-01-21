@@ -16,104 +16,37 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> expenses = expenseList;
 
-  void _openCreateExpenseModal() {
+  void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (builderCtx) => ExpenseCreate());
+        context: context, builder: (builderContext) => ExpenseCreate());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome to my page"),
-        backgroundColor: Colors.deepPurpleAccent,
+        title: Text(
+          "Expense Tracker",
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
-          IconButton(onPressed: _openCreateExpenseModal, icon: Icon(Icons.add))
+          IconButton(
+            onPressed: _openAddExpenseOverlay,
+            icon: Icon(Icons.add),
+            style: IconButton.styleFrom(foregroundColor: Colors.black),
+          )
         ],
       ),
       body: Container(
         alignment: Alignment.topCenter,
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: 200,
-                child: Card(
-                    margin: EdgeInsets.all(0),
-                    shadowColor: Colors.transparent,
-                    color: Colors.transparent,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      spacing: 50,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 50,
-                              color: Colors.red,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Icon(Icons.fastfood),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 50,
-                              color: Colors.red,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Icon(Icons.drive_eta),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 50,
-                              color: Colors.red,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Icon(Icons.theater_comedy),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 50,
-                              color: Colors.red,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Icon(Icons.local_hospital),
-                          ],
-                        ),
-                      ],
-                    )),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Expanded(child: ExpenseList()),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(child: ExpenseList()),
+          ],
         ),
       ),
     );

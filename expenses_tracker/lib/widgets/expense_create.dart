@@ -1,3 +1,4 @@
+import 'package:expenses_tracker/enums/expense_category.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +15,8 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
 
-  DateTime? selectedDate;
+  DateTime? _selectedDate;
+  ExpenseCategory? _selectedCategory;
 
   @override
   void dispose() {
@@ -29,11 +31,11 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
         DateTime(currentDate.year - 1, currentDate.month, currentDate.day);
     final pickedDate = await showDatePicker(
         context: context,
-        initialDate: selectedDate ?? currentDate,
+        initialDate: _selectedDate ?? currentDate,
         firstDate: firstDate,
         lastDate: currentDate);
     setState(() {
-      selectedDate = pickedDate;
+      _selectedDate = pickedDate;
     });
   }
 
@@ -46,6 +48,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
             maxLength: 50,
@@ -73,9 +76,9 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
               ),
               ElevatedButton.icon(
                   label: Text(
-                    selectedDate == null
+                    _selectedDate == null
                         ? "Select Date"
-                        : DateFormat("dd/MM/yyyy").format(selectedDate!),
+                        : DateFormat("dd/MM/yyyy").format(_selectedDate!),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   onPressed: _showDatePicker,
@@ -87,9 +90,28 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 10,
             children: [
+              DropdownButton(
+                  focusColor: Colors.transparent,
+                  underline: const SizedBox(),
+                  value: _selectedCategory ?? ExpenseCategory.miscellaneous,
+                  items: [
+                    ...ExpenseCategory.values
+                        .map((category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category.name.toUpperCase()),
+                            ))
+                  ],
+                  onChanged: (value) => {
+                        setState(() {
+                          if (value != null) {
+                            _selectedCategory = value;
+                          }
+                        })
+                      }),
+              const Spacer(),
               ElevatedButton(
                   onPressed: _cancelCreateExpense,
                   child: Text(
